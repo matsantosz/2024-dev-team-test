@@ -1,0 +1,250 @@
+{
+  "info": {
+    "name": "docs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "logout",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "register",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "example@buzzvel.com",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "password_confirmation",
+                  "value": "password",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "login",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "email",
+                  "value": "example@buzzvel.com",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "holiday_plans",
+      "item": [
+        {
+          "name": "index",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/holiday_plans",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "show",
+          "event": [],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/holiday_plans/01j4j7z66835eftx3mtsf93gzc",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "store",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/holiday_plans",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "title",
+                  "value": "South Korea Trip",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "location",
+                  "value": "South Korea",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "date",
+                  "value": "2024-12-31",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "description",
+                  "value": "One thing to note is that, due to South Korea’s various occupations and dictatorships, many historical buildings and sights have been destroyed. Instead, you’ll often see remnants or memorials. I strongly advocate having a guide, who can bring them to life.\n\nMy guide for Seoul, Kim, had been born in the city and was particularly eager to make sure I experienced every cultural facet, from helping me pick out the best culinary delicacies to divulging her family history.",
+                  "disabled": false,
+                  "type": "default"
+                },
+                {
+                  "key": "participants",
+                  "value": "Matheus,Lucas,Marcos",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "update",
+          "event": [],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/holiday_plans/01j4j7z66835eftx3mtsf93gzc",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "participants",
+                  "value": "Matheus,Junior",
+                  "disabled": false,
+                  "type": "default"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "delete",
+          "event": [],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/holiday_plans/01j4j7z66835eftx3mtsf93gzc",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "generate_pdf",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/holiday_plans/01j4j7z66835eftx3mtsf93gzc/generate",
+              "host": [],
+              "path": [],
+              "query": [],
+              "variable": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "bruno",
+      "event": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api",
+      "type": "default"
+    }
+  ]
+}
