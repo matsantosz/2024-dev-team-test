@@ -33,18 +33,6 @@ final readonly class UserService
         );
     }
 
-    public function createToken(User $user, string $name): NewAccessToken
-    {
-        return $this->databaseManager->transaction(
-            callback: function () use ($user, $name) {
-                $user->tokens()->delete();
-
-                return $user->createToken($name);
-            },
-            attempts: 3,
-        );
-    }
-
     public function login(CredentialsData $credentials): bool
     {
         return $this->authManager->attempt(
@@ -52,6 +40,22 @@ final readonly class UserService
                 'email'    => $credentials->email,
                 'password' => $credentials->password,
             ],
+        );
+    }
+
+    public function createToken(User $user, string $name): NewAccessToken
+    {
+        return $this->databaseManager->transaction(
+            callback: fn () => $user->createToken($name),
+            attempts: 3,
+        );
+    }
+
+    public function rekoveTokens(User $user): int
+    {
+        return $this->databaseManager->transaction(
+            callback: fn () => $user->tokens()->delete(),
+            attempts: 3,
         );
     }
 
