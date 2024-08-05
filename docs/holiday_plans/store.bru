@@ -1,0 +1,27 @@
+meta {
+  name: store
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/holiday_plans
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: 9|XTUfzXi6flnM4C0xajxutHYNSCELoPbzGi8Ak4vj59e59cf6
+}
+
+body:form-urlencoded {
+  title: South Korea Trip
+  location: South Korea
+  date: 2024-12-31
+  description: '''
+    One thing to note is that, due to South Korea’s various occupations and dictatorships, many historical buildings and sights have been destroyed. Instead, you’ll often see remnants or memorials. I strongly advocate having a guide, who can bring them to life.
+    
+    My guide for Seoul, Kim, had been born in the city and was particularly eager to make sure I experienced every cultural facet, from helping me pick out the best culinary delicacies to divulging her family history.
+  '''
+  participants: Matheus,Lucas,Marcos
+}

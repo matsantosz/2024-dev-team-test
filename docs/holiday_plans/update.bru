@@ -1,0 +1,19 @@
+meta {
+  name: update
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{base_url}}/holiday_plans/01j4j7z66835eftx3mtsf93gzc
+  body: formUrlEncoded
+  auth: bearer
+}
+
+auth:bearer {
+  token: 9|XTUfzXi6flnM4C0xajxutHYNSCELoPbzGi8Ak4vj59e59cf6
+}
+
+body:form-urlencoded {
+  participants: Matheus,Junior
+}
