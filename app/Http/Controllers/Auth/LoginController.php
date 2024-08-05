@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 final class LoginController
 {
-    public function __construct(private UserService $userService) {}
+    public function __construct(private readonly UserService $userService) {}
 
     public function __invoke(CredentialsData $credentials): JsonResponse
     {

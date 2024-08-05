@@ -18,7 +18,7 @@ final class RegisterController
 
         return new JsonResponse(
             data: [
-                'message' => 'Register Success!',
+                'message' => 'Register success!',
                 'data'    => $user->toArray(),
             ],
         );
