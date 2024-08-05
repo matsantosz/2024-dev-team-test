@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    working_dir: /var/www/html
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www/html
+
+  db:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: buzzvel
+      MYSQL_ALLOW_EMPTY_PASSWORD: true

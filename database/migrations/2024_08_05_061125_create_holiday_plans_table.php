@@ -19,7 +19,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('title')->index();
-            $table->text('description')->index();
+            $table->text('description');
             $table->dateTime('date')->index();
             $table->string('location')->index();
             $table->timestamps();
