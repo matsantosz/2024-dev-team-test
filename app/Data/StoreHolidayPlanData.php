@@ -20,7 +20,7 @@ final class StoreHolidayPlanData extends Data
         #[WithTransformer(DateTimeInterfaceTransformer::class, format: 'Y-m-d')]
         public CarbonImmutable $date,
         public string $location,
-        public ?string $participants,
+        public ?string $participants = '',
     ) {}
 
     public static function rules($context): array

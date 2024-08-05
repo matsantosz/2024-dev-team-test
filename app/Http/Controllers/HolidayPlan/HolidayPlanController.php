@@ -34,7 +34,7 @@ final class HolidayPlanController
     {
         $holidayPlan = $this->holidayPlanService->create(
             attributes: $data->except('participants')->toArray(),
-            participants: explode(',', $data->participants),
+            participants: array_filter(explode(',', $data->participants)),
             forUser: $this->userService->user(),
         );
 
@@ -61,7 +61,7 @@ final class HolidayPlanController
 
         $this->holidayPlanService->update(
             attributes: $data->except('participants')->toAttributes(),
-            participants: explode(',', $data->participants),
+            participants: array_filter(explode(',', $data->participants)),
             holidayPlan: $holidayPlan,
         );
 
