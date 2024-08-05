@@ -33,7 +33,8 @@ final class HolidayPlanController
     public function store(StoreHolidayPlanData $data): JsonResponse
     {
         $holidayPlan = $this->holidayPlanService->create(
-            attributes: $data->toArray(),
+            attributes: $data->except('participants')->toArray(),
+            participants: explode(',', $data->participants),
             forUser: $this->userService->user(),
         );
 

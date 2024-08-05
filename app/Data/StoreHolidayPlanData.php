@@ -20,15 +20,17 @@ final class StoreHolidayPlanData extends Data
         #[WithTransformer(DateTimeInterfaceTransformer::class, format: 'Y-m-d')]
         public CarbonImmutable $date,
         public string $location,
+        public ?string $participants,
     ) {}
 
     public static function rules($context): array
     {
         return [
-            'title'       => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-            'date'        => ['required', 'string', 'date_format:Y-m-d'],
-            'location'    => ['required', 'string', 'max:255'],
+            'title'        => ['required', 'string', 'max:255'],
+            'description'  => ['required', 'string'],
+            'date'         => ['required', 'string', 'date_format:Y-m-d'],
+            'location'     => ['required', 'string', 'max:255'],
+            'participants' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

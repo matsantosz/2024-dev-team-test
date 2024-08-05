@@ -14,12 +14,19 @@ final class HolidayPlanService
         private DatabaseManager $databaseManager,
     ) {}
 
-    public function create(array $attributes, User $forUser): HolidayPlan
+    public function create(array $attributes, array $participants, User $forUser): HolidayPlan
     {
         return $this->databaseManager->transaction(
-            callback: fn () => $forUser->holidayPlans()->create(
-                attributes: $attributes,
-            ),
+            callback: function () use ($attributes, $participants, $forUser) {
+                $holidayPlan = $forUser->holidayPlans()->create($attributes);
+
+                $this->createParticipants(
+                    holidayPlan: $holidayPlan,
+                    participants: $participants,
+                );
+
+                return $holidayPlan;
+            },
             attempts: 3,
         );
     }
@@ -39,6 +46,21 @@ final class HolidayPlanService
         return $this->databaseManager->transaction(
             callback: fn () => $holidayPlan->delete(),
             attempts: 3,
+        );
+    }
+
+    private function createParticipants(HolidayPlan $holidayPlan, array $participants): void
+    {
+        if (empty($participants)) {
+            return;
+        }
+
+        $participants = collect($participants)->map(fn (string $name) => [
+            'name' => $name,
+        ]);
+
+        $holidayPlan->participants()->createManyQuietly(
+            records: $participants->toArray(),
         );
     }
 }
