@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\HolidayPlan\GeneratePdfController;
 use App\Http\Controllers\HolidayPlan\HolidayPlanController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,8 @@ Route::middleware('auth:sanctum')->group(function () {
         name: 'holiday_plans',
         controller: HolidayPlanController::class,
     );
+    Route::post(
+        uri: 'holiday_plans/{holidayPlan}/generate',
+        action: GeneratePdfController::class,
+    )->name('holiday_plans.generate');
 });
