@@ -12,6 +12,7 @@ final class HolidayPlanService
 {
     public function __construct(
         private DatabaseManager $databaseManager,
+        private ParticipantService $participantService,
     ) {}
 
     public function create(array $attributes, array $participants, User $forUser): HolidayPlan
@@ -20,7 +21,7 @@ final class HolidayPlanService
             callback: function () use ($attributes, $participants, $forUser) {
                 $holidayPlan = $forUser->holidayPlans()->create($attributes);
 
-                $this->createParticipants(
+                $this->participantService->createParticipants(
                     holidayPlan: $holidayPlan,
                     participants: $participants,
                 );
@@ -31,12 +32,17 @@ final class HolidayPlanService
         );
     }
 
-    public function update(array $attributes, HolidayPlan $holidayPlan): bool
+    public function update(array $attributes, array $participants, HolidayPlan $holidayPlan): bool
     {
         return $this->databaseManager->transaction(
-            callback: fn () => $holidayPlan->update(
-                attributes: $attributes,
-            ),
+            callback: function () use ($attributes, $participants, $holidayPlan) {
+                $this->participantService->syncParticipants(
+                    holidayPlan: $holidayPlan,
+                    participants: $participants,
+                );
+
+                return $holidayPlan->update($attributes);
+            },
             attempts: 3,
         );
     }
@@ -46,21 +52,6 @@ final class HolidayPlanService
         return $this->databaseManager->transaction(
             callback: fn () => $holidayPlan->delete(),
             attempts: 3,
-        );
-    }
-
-    private function createParticipants(HolidayPlan $holidayPlan, array $participants): void
-    {
-        if (empty($participants)) {
-            return;
-        }
-
-        $participants = collect($participants)->map(fn (string $name) => [
-            'name' => $name,
-        ]);
-
-        $holidayPlan->participants()->createManyQuietly(
-            records: $participants->toArray(),
         );
     }
 }

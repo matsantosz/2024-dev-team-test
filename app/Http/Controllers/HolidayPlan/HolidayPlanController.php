@@ -60,7 +60,8 @@ final class HolidayPlanController
         Gate::authorize('update', $holidayPlan);
 
         $this->holidayPlanService->update(
-            attributes: $data->toAttributes(),
+            attributes: $data->except('participants')->toAttributes(),
+            participants: explode(',', $data->participants),
             holidayPlan: $holidayPlan,
         );
 

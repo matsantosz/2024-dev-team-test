@@ -20,15 +20,17 @@ final class UpdateHolidayPlanData extends Data
         #[WithTransformer(DateTimeInterfaceTransformer::class, format: 'Y-m-d')]
         public ?CarbonImmutable $date,
         public ?string $location,
+        public ?string $participants,
     ) {}
 
     public static function rules($context): array
     {
         return [
-            'title'       => ['nullable', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'date'        => ['nullable', 'string', 'date_format:Y-m-d'],
-            'location'    => ['nullable', 'string', 'max:255'],
+            'title'        => ['nullable', 'string', 'max:255'],
+            'description'  => ['nullable', 'string'],
+            'date'         => ['nullable', 'string', 'date_format:Y-m-d'],
+            'location'     => ['nullable', 'string', 'max:255'],
+            'participants' => ['nullable', 'string', 'max:255'],
         ];
     }
 
