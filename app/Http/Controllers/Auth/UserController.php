@@ -10,7 +10,7 @@ use Illuminate\Auth\AuthManager;
 
 final class UserController
 {
-    public function __construct(private AuthManager $auth) {}
+    public function __construct(private readonly AuthManager $auth) {}
 
     public function __invoke(): User|Authenticatable|null
     {
