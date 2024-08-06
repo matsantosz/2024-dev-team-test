@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Auth;
 use App\Data\UserData;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 final class RegisterController
 {
@@ -21,6 +22,7 @@ final class RegisterController
                 'message' => 'Register success!',
                 'data'    => $user->toArray(),
             ],
+            status: Response::HTTP_CREATED,
         );
     }
 }
