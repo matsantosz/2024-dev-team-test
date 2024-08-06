@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Data\CredentialsData;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 final class LoginController
@@ -15,18 +17,15 @@ final class LoginController
 
     public function __invoke(CredentialsData $credentials): JsonResponse
     {
-        $authenticated = $this->userService->login($credentials);
+        $user = User::where('email', $credentials->email)->first();
 
-        if (!$authenticated) {
+        if (!$user || !Hash::check($credentials->password, $user->password)) {
             throw ValidationException::withMessages([
                 'credentials' => 'The provided credentials are incorrect.',
             ]);
         }
 
-        $token = $this->userService->createToken(
-            user: $this->userService->user(),
-            name: $credentials->email,
-        );
+        $token = $user->createToken($credentials->email);
 
         return new JsonResponse(
             data: [

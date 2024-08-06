@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('holiday_plans', function (Blueprint $table) {
             $table->ulid('id')->primary();
 
-            $table->foreignUlid('user_id')
+            $table->foreignId('user_id')
                 ->index()
                 ->constrained()
                 ->cascadeOnDelete();

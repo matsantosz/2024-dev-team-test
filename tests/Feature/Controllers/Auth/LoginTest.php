@@ -15,13 +15,9 @@ test('should create a bearer token', function () {
         'password' => 'password',
     ];
 
-    assertGuest();
-
     $response = postJson(route('auth:login'), $data);
     $response->assertOk();
     $response->assertJson([
         'message' => 'You\'re logged in!',
     ]);
-
-    assertAuthenticated();
 });
